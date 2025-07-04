@@ -90,6 +90,7 @@ public static class Algorithms
         return count;
     }
 
+    // NOTE: Algorithm 4 is added by me Daniel Opute to check for O(2n) which equals O(n)
     /// <summary>
     /// The count variable is keeping track of the amount
     /// of work done in the function.  When the function is 
