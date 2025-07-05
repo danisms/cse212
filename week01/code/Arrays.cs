@@ -51,8 +51,8 @@ public static class Arrays
         // be implemented by another person.
 
         // SOLUTION 1:
-        // define a list to hold the splitted left part of the data
-        // define another list to hold the splited right part of the data
+        // define a list to hold the splitted left part of the data using a range of the amount
+        // define another list to hold the splited right part of the data using a range of the amount
         // add the left list part to the right list i.e starting with the right part
         // return the rearranged new list.
 
