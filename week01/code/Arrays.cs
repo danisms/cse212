@@ -56,14 +56,14 @@ public static class Arrays
         // add the left list part to the right list i.e starting with the right part
         // return the rearranged new list.
 
-        var leftList = data.GetRange(0, data.Count - amount);
+        var leftList = data.GetRange(0, data.Count - amount);  // get the left list range of data using the amount
         Debug.WriteLine($"Data: {string.Join(", ", data)}");  // for debugging purpose
         Debug.WriteLine($"Amount: {amount}");  // for debugging purpose
         Debug.WriteLine($"Left List: {string.Join(", ", leftList)}");  // for debugging purpose
         Debug.WriteLine($"Data Check: {string.Join(", ", data)}");  // for debugging purpose
 
 
-        var rightList = data.GetRange(data.Count - amount, amount);
+        var rightList = data.GetRange(data.Count - amount, amount);  // get the right list range of data using the amount
         Debug.WriteLine($"Right List: {string.Join(", ", rightList)}");  // for debugging purpose
 
         rightList.AddRange(leftList);  // add left list to right list i.e rotating list
