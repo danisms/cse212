@@ -12,31 +12,39 @@ public static class StandardDeviation {
         Console.WriteLine(StandardDeviation3(numbers)); // Should be 147.322 
     }
 
-    private static double StandardDeviation1(int[] numbers) {
+    private static double StandardDeviation1(int[] numbers)
+    {
         var total = 0.0;
         var count = 0;
-        foreach (var number in numbers) {
+        foreach (var number in numbers)
+        {
             total += number;
             count += 1;
         }
 
         var avg = total / count;
         var sumSquaredDifferences = 0.0;
-        foreach (var number in numbers) {
+        foreach (var number in numbers)
+        {
             sumSquaredDifferences += Math.Pow(number - avg, 2);
         }
 
         var variance = sumSquaredDifferences / count;
         return Math.Sqrt(variance);
+
+        // Big O = O(n)
     }
 
-    private static double StandardDeviation2(int[] numbers) {
+    private static double StandardDeviation2(int[] numbers)
+    {
         var sumSquaredDifferences = 0.0;
         var countNumbers = 0;
-        foreach (var number in numbers) {
+        foreach (var number in numbers)
+        {
             var total = 0;
             var count = 0;
-            foreach (var value in numbers) {
+            foreach (var value in numbers)
+            {
                 total += value;
                 count += 1;
             }
@@ -48,17 +56,23 @@ public static class StandardDeviation {
 
         var variance = sumSquaredDifferences / countNumbers;
         return Math.Sqrt(variance);
+        
+        // Big O = O(n^2)
     }
 
-    private static double StandardDeviation3(int[] numbers) {
+    private static double StandardDeviation3(int[] numbers)
+    {
         var count = numbers.Length;
         var avg = (double)numbers.Sum() / count;
         var sumSquaredDifferences = 0.0;
-        foreach (var number in numbers) {
+        foreach (var number in numbers)
+        {
             sumSquaredDifferences += Math.Pow(number - avg, 2);
         }
 
         var variance = sumSquaredDifferences / count;
         return Math.Sqrt(variance);
+        
+        // Big O = O(n)
     }
 }

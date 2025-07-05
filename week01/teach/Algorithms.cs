@@ -103,7 +103,6 @@ public static class Algorithms
         for (var i = 0; i < size; ++i)
         {
             count += 1;
-
         }
 
         for (var j = 0; j < size; ++j)
