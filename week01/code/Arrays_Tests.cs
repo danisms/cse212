@@ -1,8 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 // DO NOT MODIFY THIS FILE
-// THERE WAS A Variable Refference ERROR IN THE "RotateListRightTests"
-// It Was Corrected.
 
 [TestClass]
 public class MultiplesOfTests
@@ -36,31 +34,31 @@ public class RotateListRightTests
     public void TestRotateListRight_Rotate1()
     {
         List<int> numbers = new() { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-        List<int> rotatedNumbers = Arrays.RotateListRight(numbers, 1);
-        CollectionAssert.AreEqual(new List<int> { 9, 1, 2, 3, 4, 5, 6, 7, 8 }, rotatedNumbers);
+        Arrays.RotateListRight(numbers, 1);
+        CollectionAssert.AreEqual(new List<int> { 9, 1, 2, 3, 4, 5, 6, 7, 8 }, numbers);
     }
 
     [TestMethod]
     public void TestRotateListRight_Rotate5()
     {
         List<int> numbers = new() { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-        List<int> rotatedNumbers = Arrays.RotateListRight(numbers, 5);
-        CollectionAssert.AreEqual(new List<int> { 5, 6, 7, 8, 9, 1, 2, 3, 4 }, rotatedNumbers);
+        Arrays.RotateListRight(numbers, 5);
+        CollectionAssert.AreEqual(new List<int> { 5, 6, 7, 8, 9, 1, 2, 3, 4 }, numbers);
     }
 
     [TestMethod]
     public void TestRotateListRight_Rotate3()
     {
         List<int> numbers = new() { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-        List<int> rotatedNumbers = Arrays.RotateListRight(numbers, 3);
-        CollectionAssert.AreEqual(new List<int> { 7, 8, 9, 1, 2, 3, 4, 5, 6 }, rotatedNumbers);
+        Arrays.RotateListRight(numbers, 3);
+        CollectionAssert.AreEqual(new List<int> { 7, 8, 9, 1, 2, 3, 4, 5, 6 }, numbers);
     }
 
     [TestMethod]
     public void TestRotateListRight_Rotate9()
     {
         List<int> numbers = new() { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-        List<int> rotatedNumbers = Arrays.RotateListRight(numbers, 9);
-        CollectionAssert.AreEqual(new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 }, rotatedNumbers);
+        Arrays.RotateListRight(numbers, 9);
+        CollectionAssert.AreEqual(new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 }, numbers);
     }
 }

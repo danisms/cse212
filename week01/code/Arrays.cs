@@ -50,10 +50,11 @@ public static class Arrays
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
-        // SOLUTION 1:
-        // define a list to hold the splitted left part of the data using a range of the amount
-        // define another list to hold the splited right part of the data using a range of the amount
-        // add the left list part to the right list i.e starting with the right part
+        // SOLUTION:
+        // Define a list to hold the splitted left part of the data using a range of the amount.
+        // Define another list to hold the splited right part of the data using a range of the amount.
+        // Clear the original refferenced list i.e data
+        // Add right list to cleared data, and then the left list too so as to rotate the list.
         // return the rearranged new list.
 
         var leftList = data.GetRange(0, data.Count - amount);  // get the left list range of data using the amount
@@ -66,8 +67,11 @@ public static class Arrays
         var rightList = data.GetRange(data.Count - amount, amount);  // get the right list range of data using the amount
         Debug.WriteLine($"Right List: {string.Join(", ", rightList)}");  // for debugging purpose
 
-        rightList.AddRange(leftList);  // add left list to right list i.e rotating list
-        Debug.WriteLine($"Rotated Right List: {string.Join(", ", rightList)}");  // for debugging purpose
-        return rightList;  // return rotated list
+        data.Clear();  // clear data
+
+        data.AddRange(rightList);
+        data.AddRange(leftList);  // add left list to right list i.e rotating list
+        Debug.WriteLine($"Rotated Right List: {string.Join(", ", data)}");  // for debugging purpose
+        return data;
     }
 }
