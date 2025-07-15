@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 public class PriorityQueueTests
 {
     [TestMethod]
-    // Scenario: Add 4 company roles to queue and check if enqueue is beign queued propertly
+    // Scenario: Add 4 company roles to queue and check if enqueue is being queued propertly
     // i.e. Each new role goes to the back of the queue.
     // Enqueue order: ("p.r.o", 5), ("secretary", 9), ("vice-president", 8), ("president", 10)
     // Expected Result: [("p.r.o", 5), ("secretary", 9), ("vice-president", 8), ("president", 10)]
