@@ -2,6 +2,9 @@
 {
     private List<PriorityItem> _queue = new();
 
+    public int Length => _queue.Count;
+
+
     /// <summary>
     /// Add a new value to the queue with an associated priority.  The
     /// node is always added to the back of the queue regardless of 
@@ -24,14 +27,24 @@
 
         // Find the index of the item with the highest priority to remove
         var highPriorityIndex = 0;
-        for (int index = 1; index < _queue.Count - 1; index++)
+        for (int index = 1; index < _queue.Count; index++)
         {
-            if (_queue[index].Priority >= _queue[highPriorityIndex].Priority)
+            // NOTE: the index starts from 1 not 0 and _queue.Count was having '- 1'.
+            // I removed the '- 1' so as to allow the loop get to the last value in the _queue.
+            int currentHighestPriorityIndex = _queue[highPriorityIndex].Priority;
+            int currentPriorityIndex = _queue[index].Priority;
+            // make sure dequeue follows FIFO strategy by using only > and not >= in comparison
+            if (currentPriorityIndex > currentHighestPriorityIndex)
+            {
                 highPriorityIndex = index;
+            }
         }
 
         // Remove and return the item with the highest priority
         var value = _queue[highPriorityIndex].Value;
+        _queue.RemoveAt(highPriorityIndex);  // highest priority item from queue
+        Console.WriteLine($"Removed From Queue: {value}");
+
         return value;
     }
 
