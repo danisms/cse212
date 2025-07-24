@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 // DO NOT MODIFY THIS FILE
@@ -315,4 +316,143 @@ public class EarthquakeDailySummaryTests
             Assert.IsTrue(s.Contains(" - Mag "), "String must contain a magnitude");
         }
     }
+}
+
+
+/*************************************************
+*** ADDING SET INTERSECTS AND UNION TEST CASES ***
+*************************************************/
+/// INTERSECT TEST CASES
+[TestClass]
+public class SetIntersectTests
+{
+    [TestMethod]
+    // Scenario: Get the intersect of two sets of integers provided.
+    // set A is a multiple of 2 starting from 2, with size 8
+    // set B is a multiple of 3 starting from 3, with size 7
+    // setA = [2, 4, 6, 8, 10, 12, 14, 16, 18]
+    // setB = [3, 6, 9, 12, 15, 18, 21, 24]
+    // Expected Result: [6, 12, 18]
+    public void Set_Intersect_Integers()
+    {
+        int[] setA = [2, 4, 6, 8, 10, 12, 14, 16, 18];
+        int[] setB = [3, 6, 9, 12, 15, 18, 21, 24];
+        var expected = new HashSet<int>([6, 12, 18]);
+        var actual = SetsAndMaps.GetSetIntersect(setA, setB);
+
+        // // for debugging purpose
+        // Debug.WriteLine("INTERSECT INTEGERS RESULT");
+        // foreach (var item in actual)
+        // {
+        //     Debug.WriteLine($"Actual: {item}");
+        // }
+
+        // foreach (var item in expected)
+        // {
+        //     Debug.WriteLine($"Expected: {item}");
+        // }
+
+        Assert.IsTrue(expected.SetEquals(actual));
+    }
+
+    [TestMethod]
+    // Scenario: Get the interset of two sets of strings, that is of same size, provided.
+    // set A is a set of girls favorite food
+    // set B is a set of boys favorite food
+    // girlsFavoriteFood = ["rice", "noddle", "shawarma", "hotdog", "pizzer"]
+    // boysFavoriteFood = ["bugger", "beans", "rice", "hotdog", "bugger bread"]
+    // Expected Result: ["rice", "hotdog"]
+    public void Set_Intersect_String()
+    {
+        string[] girlsFavoriteFood = ["rice", "noddle", "shawarma", "hotdog", "pizzer"];
+        string[] boysFavoriteFood = ["bugger", "beans", "rice", "hotdog", "bugger bread"];
+        var expected = new HashSet<string>(["rice", "hotdog"]);
+        var actual = SetsAndMaps.GetSetIntersect(girlsFavoriteFood, boysFavoriteFood);
+
+        Assert.IsTrue(expected.SetEquals(actual));
+    }
+
+    [TestMethod]
+    // Scenario: Get the interset of two sets where one set appears to be empty
+    // setA = [10, 20, 30, 40, 50]
+    // setB = []
+    // Expected Result: []
+    public void Set_Intersect_Empty()
+    {
+        int[] setA = [10, 20, 30, 40, 50];
+        int[] setB = [];
+        var expected = new HashSet<int>([]);
+        var actual = SetsAndMaps.GetSetIntersect(setA, setB);
+
+        Assert.IsTrue(expected.SetEquals(actual));
+    }
+}
+
+
+/// UNION TEST CASES
+[TestClass]
+public class SetUnionTests
+{
+    [TestMethod]
+    // Scenario: Get the union of two sets of integers provided.
+    // set A is a multiple of 2 starting from 2, with size 8
+    // set B is a multiple of 3 starting from 3, with size 7
+    // setA = [2, 4, 6, 8, 10, 12, 14, 16, 18]
+    // setB = [3, 6, 9, 12, 15, 18, 21, 24]
+    // Expected Result: [2, 4, 6, 8, 10, 12, 14, 16, 18, 3, 9, 15, 21, 24]
+    public void Set_Union_Integers()
+    {
+        int[] setA = [2, 4, 6, 8, 10, 12, 14, 16, 18];
+        int[] setB = [3, 6, 9, 12, 15, 18, 21, 24];
+        var expected = new HashSet<int>([2, 4, 6, 8, 10, 12, 14, 16, 18, 3, 9, 15, 21, 24]);
+
+        var actual = SetsAndMaps.GetSetUnion(setA, setB);
+
+        // // for debugging purpose
+        // Debug.WriteLine("INTERSECT INTEGERS RESULT");
+        // foreach (var item in actual)
+        // {
+        //     Debug.WriteLine($"Actual: {item}");
+        // }
+
+        // foreach (var item in expected)
+        // {
+        //     Debug.WriteLine($"Expected: {item}");
+        // }
+
+        Assert.IsTrue(expected.SetEquals(actual));
+    }
+
+    [TestMethod]
+    // Scenario: Get the interset of two sets of strings, that is of same size, provided.
+    // set A is a set of girls favorite food
+    // set B is a set of boys favorite food
+    // girlsFavoriteFood = ["rice", "noddle", "shawarma", "hotdog", "pizzer"]
+    // boysFavoriteFood = ["bugger", "beans", "rice", "hotdog", "bugger bread"]
+    // Expected Result: ["rice", "noddle", "shawarma", "hotdog", "pizzer", "bugger", "beans", "bugger bread"]
+    public void Set_Union_String()
+    {
+        string[] girlsFavoriteFood = ["rice", "noddle", "shawarma", "hotdog", "pizzer"];
+        string[] boysFavoriteFood = ["bugger", "beans", "rice", "hotdog", "bugger bread"];
+        var expected = new HashSet<string>(["rice", "noddle", "shawarma", "hotdog", "pizzer", "bugger", "beans", "bugger bread"]);
+        var actual = SetsAndMaps.GetSetUnion(girlsFavoriteFood, boysFavoriteFood);
+
+        Assert.IsTrue(expected.SetEquals(actual));
+    }
+
+    [TestMethod]
+    // Scenario: Get the interset of two sets where one set appears to be empty
+    // setA = [10, 20, 30, 40, 50]
+    // setB = []
+    // Expected Result: [10, 20, 30, 40, 50]
+    public void Set_Union_OfAnEmptySet()
+    {
+        int[] setA = [10, 20, 30, 40, 50];
+        int[] setB = [];
+        var expected = new HashSet<int>([10, 20, 30, 40, 50]);
+        var actual = SetsAndMaps.GetSetUnion(setA, setB);
+
+        Assert.IsTrue(expected.SetEquals(actual));
+    }
+
 }

@@ -238,7 +238,7 @@ public static class SetsAndMaps
         // 3. Return an array of these string descriptions.
 
         // output each place earthquake has happened today and it's magnitude
-        var earthquakesDescriptions = new List<string>{};
+        var earthquakesDescriptions = new List<string> { };
         foreach (Feature feature in featureCollection.Features)
         {
             var formatedString = $"{feature.Properties.Place} - Mag {feature.Properties.Mag}";
@@ -246,5 +246,112 @@ public static class SetsAndMaps
         }
 
         return [.. earthquakesDescriptions];
+    }
+
+
+
+    /// <summary>
+    /// A method that gets the intersection of two sets.
+    /// It accepts two parameters of sets or an array
+    /// and return the intersection of the two sets or an empty set if no intersection if found.
+    /// </summary>
+    /// <param name="set1">The first set of items</param>
+    /// <param name="set2">The second set of items</param>
+    /// <returns>Intersection of the two sets || an empty set if no intersection if found</returns>
+    public static HashSet<T> GetSetIntersect<T>(T[] set1, T[] set2)
+    {
+        // SOLUTION (O(n))
+        // Gets two arrays, converts the arrays to sets
+        // Creates an empty set named 'intersects' to hold the intersection of the two sets
+        // Checks if both set sizes are equal
+        // If not, loop through the set with the smaller size and
+        // compare it to the set with the larger size (The check in set uses constant time O(1))
+        // Check if the item from the looping set exists in the other set
+        // If found, check if the item doesn't already exist in the 'intersects' set
+        // If it doesn't exist, add the item to 'intersects'
+        // When done, return the 'intersects' set
+
+
+        // create sets
+        var firstSet = new HashSet<T>(set1);
+        var secondSet = new HashSet<T>(set2);
+        var intersects = new HashSet<T>();
+
+        // get the lesser set for looping
+        var loopingSet = firstSet;
+        var compareSet = secondSet;
+
+        if (firstSet.Count != secondSet.Count)
+        {
+            if (firstSet.Count > secondSet.Count)
+            {
+                loopingSet = secondSet;
+                compareSet = firstSet;
+            }
+        }
+
+        // get intersects
+        foreach (var item in loopingSet)
+        {
+            if (compareSet.Contains(item))
+            {
+                // check if item doesn't already exist in intersects
+                if (intersects.Contains(item) == false)
+                {
+                    intersects.Add(item);
+                }
+            }
+        }
+
+        return intersects;
+    }
+
+    /// <summary>
+    /// A method that gets the union of two sets.
+    /// It accepts two parameters of sets or an array
+    /// and return the union of the two sets or an empty set if both sets is empty.
+    /// </summary>
+    /// <param name="set1">The first set of items</param>
+    /// <param name="set2">The second set of items</param>
+    /// <returns>Union of the two sets || an empty set if both sets are empty</returns>
+    public static HashSet<T> GetSetUnion<T>(T[] set1, T[] set2)
+    {
+        // SOLUTION (O(n))
+        // Gets two arrays, converts the arrays to sets
+        // Creates a new set named 'union' to hold the union of the two sets
+        // Checks if both set sizes are the same; if not, assigns the set with the
+        // greater size to the newly created set (because set checks using constant time O(1))
+        // Loops through the other set, and checks if the looping item is in the union set (O(1))
+        // If the item isn't in the union set, adds the item to the union set
+
+
+        // create sets
+        var firstSet = new HashSet<T>(set1);
+        var secondSet = new HashSet<T>(set2);
+        var union = new HashSet<T>(firstSet);
+
+        // get the lesser set for looping
+        var loopingSet = secondSet;
+
+        if (firstSet.Count != secondSet.Count)
+        {
+            if (firstSet.Count < secondSet.Count)
+            {
+                loopingSet = firstSet;
+                union = secondSet;
+            }
+        }
+
+        // get intersects
+        foreach (var item in loopingSet)
+        {
+            // check if item doesn't already exist in union
+            if (union.Contains(item) == false)
+            {
+                union.Add(item);
+            }
+        }
+
+        return union;
     }
 }
