@@ -149,25 +149,24 @@ public static class SetsAndMaps
         // }
 
         // Check if the two word dictionaries are equal. Return true if they match; otherwise, return false.
-        bool isAnagram = true;
         foreach (var pair in word1Dictionary)
         {
             // first check if dictionary 2 contain the search key from dictionary 1
             if (!word2Dictionary.ContainsKey(pair.Key))
             {
-                isAnagram = false;
+                return false;
             }
             else
             {
                 // check if the value in dictionary 2 is same as the value in dictionary 1
                 if (word2Dictionary[pair.Key] != pair.Value)
                 {
-                    isAnagram = false;
+                    return false;
                 }
             }
         }
 
-        return isAnagram;
+        return true;
 
         // HELPER FUNCTION
         static Dictionary<char, int> CreateCharDictionary(string word, bool isCaseSensitive = false, bool ignoreSpace = true)
