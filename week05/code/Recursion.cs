@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Diagnostics;
 
 public static class Recursion
 {
@@ -44,17 +45,48 @@ public static class Recursion
     /// You can assume that the size specified is always valid (between 1 
     /// and the length of the letters list).
     /// </summary>
-    public static void PermutationsChoose(List<string> results, string letters, int size, string word = "")
+    public static void PermutationsChoose(List<string> results, string letters, int size, string word = "", int originalLettersSize = 0)
     {
         // TODO Start Problem 2
         // base case
-        if (letters.Length == 0)
+
+        // get no of permutation
+        // var NoOfPermutation = Factoria(letters.Length) / Factoria(letters.Length - size);  // for debugging purpose
+        // Debug.WriteLine($"NO OF PERMUTATION: {NoOfPermutation}");  // for debugging purpose
+
+        if (originalLettersSize == 0)
+        {
+            originalLettersSize = letters.Length;
+        }
+
+        if (letters.Length == (originalLettersSize - size))
         {
             results.Add(word);
         }
         else
         {
-            
+            for (int i = 0; i < letters.Length; i++)
+            {
+                char currentLetter = letters[i];
+                var lettersLeft = letters.Remove(i, 1);
+                PermutationsChoose(results, lettersLeft, size, word + currentLetter, originalLettersSize);
+            }
+        }
+    }
+
+    /// <summary>
+    /// A function to get the factoria of any given number
+    /// </summary>
+    /// <param name="number">get the factoria of the given number</param>
+    private static double Factoria(double number)
+    {
+        if (number <= 1)
+        {
+            return 1;
+        }
+        else
+        {
+            return number * Factoria(number - 1);
         }
     }
 

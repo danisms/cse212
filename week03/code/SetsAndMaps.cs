@@ -119,11 +119,11 @@ public static class SetsAndMaps
         // finally compare both words keys and values if same return true, else return false;
         // TODO Problem 3 - ADD YOUR CODE HERE
 
-        // check if both words are same
-        if (word1 == word2)
-        {
-            return false;
-        }
+        // // check if both words are same
+        // if (word1 == word2)
+        // {
+        //     return false;
+        // }
 
         // check if words is anagram
         var word1Dictionary = CreateCharDictionary(word1);
@@ -171,20 +171,18 @@ public static class SetsAndMaps
         // HELPER FUNCTION
         static Dictionary<char, int> CreateCharDictionary(string word, bool isCaseSensitive = false, bool ignoreSpace = true)
         {
+            // Only apply case conversion if isCaseSensitive is false
             if (!isCaseSensitive)
             {
-                // convert word to lowercase
                 word = word.ToLowerInvariant();
             }
 
+            // Only remove spaces if ignoreSpace is true
             if (ignoreSpace)
             {
-                word = word.Replace(" ", "");  // remove white spaces from anywhere in the string
-                // // remove white spaces, tab spaces or any white space at all, which apprears anywhere in the string.
-                // word = Regex.Replace(word, @"\s+", "");
+                word = word.Replace(" ", "");
+                // If needed in future: word = Regex.Replace(word, @"\s+", "");
             }
-
-            // Debug.WriteLine($"Clean Word: {word}");  // for testing purpose
 
             var wordDictionary = new Dictionary<char, int>();
 
@@ -192,7 +190,7 @@ public static class SetsAndMaps
             {
                 if (wordDictionary.ContainsKey(letter))
                 {
-                    wordDictionary[letter] += 1;
+                    wordDictionary[letter]++;
                 }
                 else
                 {
