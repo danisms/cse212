@@ -145,9 +145,22 @@ public static class Recursion
             return 4;
 
         // TODO Start Problem 3
+        // First create the dictionary for the first time calling the function
+        if (remember == null)
+        {
+            remember = new Dictionary<int, decimal>();
+        }
+
+        // check if skip if s has been solved already
+        if (remember.ContainsKey(s))
+        {
+            return remember[s];
+        }
+
 
         // Solve using recursion
-        decimal ways = CountWaysToClimb(s - 1) + CountWaysToClimb(s - 2) + CountWaysToClimb(s - 3);
+        decimal ways = CountWaysToClimb(s - 1, remember) + CountWaysToClimb(s - 2, remember) + CountWaysToClimb(s - 3, remember);
+        remember[s] = ways;
         return ways;
     }
 
@@ -167,6 +180,51 @@ public static class Recursion
     public static void WildcardBinary(string pattern, List<string> results)
     {
         // TODO Start Problem 4
+        // SOLUTION
+        // first the base case is found when the string pattern is having no asteric "*"
+        // the simple problem:
+        // first check and find the first occuring asteric and convert it to 0,
+        // then make a recursive call.
+        // second using the converted string pattern, convert the last converted to 0 with the found index
+        // to 1 and make another recursive call.
+
+        int foundIndex = pattern.IndexOf('*');
+
+        if (foundIndex < 0)
+        {
+            results.Add(pattern);
+        }
+        else
+        {
+            string newPattern = ReplaceFirst(pattern, "*", "0");
+            WildcardBinary(newPattern, results);
+
+            if (newPattern[foundIndex] == '0')
+            {
+                string newPattern2 = ReplaceFirst(pattern, "0", "1", foundIndex);
+                WildcardBinary(newPattern2, results);
+            }
+        }
+    }
+
+    /// HELPER FUNCTION
+    /// <summary>
+    /// A method to replace only the first occurring value in a string
+    /// </summary>
+    /// <param name="input">original string</param>
+    /// <param name="oldValue">old value to be replaced</param>
+    /// <param name="newValue">new value to be inserted as the replacement</param>
+
+    private static string ReplaceFirst(string input, string oldValue, string newValue, int replaceIndex = -1)
+    {
+        if (replaceIndex < 0)
+        {
+            replaceIndex = input.IndexOf(oldValue);
+        }
+
+        if (replaceIndex < 0) return input;
+
+        return input[..replaceIndex] + newValue + input[(replaceIndex + oldValue.Length)..];
     }
 
     /// <summary>
@@ -186,6 +244,59 @@ public static class Recursion
 
         // TODO Start Problem 5
         // ADD CODE HERE
+
+        // SOLUTION
+        // Base Case:
+        // check if the current path is at the end of the maze with value 2;
+
+        // Small Problem
+        // try all possible movements of right, down, left, up and if stock,
+        // backtrack the movement.
+        // Repeat till the maze is solved.
+
+        currPath.Add((x, y));  // store to current path
+
+        if (maze.IsEnd(x, y))
+        {
+            results.Add(currPath.AsString());
+        }
+        else
+        {
+            // check right
+            if (maze.IsValidMove(currPath, x + 1, y))
+            {
+                // move to right
+                // then recurse
+                SolveMaze(results, maze, x + 1, y, currPath);
+            }
+
+            // check down
+            if (maze.IsValidMove(currPath, x, y - 1))
+            {
+                // move down
+                // then recurse
+                SolveMaze(results, maze, x, y - 1, currPath);
+            }
+
+            // check left
+            if (maze.IsValidMove(currPath, x - 1, y))
+            {
+                // move to left
+                // then recurse
+                SolveMaze(results, maze, x - 1, y, currPath);
+            }
+
+            // check up
+            if (maze.IsValidMove(currPath, x, y + 1))
+            {
+                // move up
+                // then recurse
+                SolveMaze(results, maze, x, y + 1, currPath);
+            }
+        }
+
+        currPath.RemoveAt(currPath.Count - 1);  // for backtracking
+
 
         // results.Add(currPath.AsString()); // Use this to add your path to the results array keeping track of complete maze solutions when you find the solution.
     }
