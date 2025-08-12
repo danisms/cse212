@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 public static class Trees
 {
     /// <summary>
@@ -49,5 +51,36 @@ public static class Trees
     private static void InsertMiddle(int[] sortedNumbers, int first, int last, BinarySearchTree bst)
     {
         // TODO Start Problem 5
+        // SOLUTION:
+        // Finding the middle:
+        // I calculate the middle index by subtracting first from last, dividing the result by 2, 
+        // then adding it to first. If needed, I use Math.Floor to ensure we get the lower middle 
+        // when the range length is even.
+
+        // Base case:
+        // I'll end the recursion, if first is greater than last, meaning there are no more elements left to insert.
+
+        // Recursive case/Smaller Problem:
+        // Insert the element at the middle index into the BST.
+        // Recursively insert the left half of the list by calling InsertMiddle with first and middleIndex - 1.
+        // Recursively insert the right half of the list by calling InsertMiddle with middleIndex + 1 and last.
+
+        int middleIndex = first + (int)Math.Floor((last - first) / 2.0);
+        // Console.WriteLine($"middleIndex: {middleIndex}");
+
+        if (first > last)
+        {
+            return;
+        }
+        else
+        {
+            bst.Insert(sortedNumbers[middleIndex]);
+
+            // left insertion
+            InsertMiddle(sortedNumbers, first, middleIndex - 1, bst);
+
+            // right insertion
+            InsertMiddle(sortedNumbers, middleIndex + 1, last, bst);
+        }
     }
 }
